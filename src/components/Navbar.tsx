@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import profileImg from '../assets/profile.jpg'
+import profileDarkImg from '../assets/profileDarkMode.jpg'
 
 type Props = { dark: boolean; toggle: () => void; onLoginClick: () => void; onAdminClick: () => void }
 
@@ -20,8 +22,9 @@ export default function Navbar({ dark, toggle, onLoginClick, onAdminClick }: Pro
     }}>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <div style={{ width: 36, height: 36, borderRadius: '50%', overflow: 'hidden', border: t('2px solid rgba(255,255,255,0.12)', '2px solid rgba(0,0,0,0.08)'), flexShrink: 0 }}>
-          <img src="/src/assets/profile.jpg" alt="Tuguldur" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+        <div style={{ position: 'relative', width: 36, height: 36, borderRadius: '50%', overflow: 'hidden', border: t('2px solid rgba(255,255,255,0.12)', '2px solid rgba(0,0,0,0.08)'), flexShrink: 0 }}>
+          <img src={profileImg} alt="Tuguldur" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', opacity: dark ? 0 : 1, transition: 'opacity 0.5s ease' }} />
+          <img src={profileDarkImg} alt="Tuguldur Dark" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', opacity: dark ? 1 : 0, transition: 'opacity 0.5s ease' }} />
         </div>
         <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: '-0.5px', color: t('#fff', '#111') }}>
           Tuguldur.
@@ -48,7 +51,7 @@ export default function Navbar({ dark, toggle, onLoginClick, onAdminClick }: Pro
         {user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             {user.role === 'admin' && (
-              <button onClick={onAdminClick} style={{ fontSize: 12, cursor: 'pointer', padding: '6px 14px', borderRadius: 20, border: '1px solid rgba(59,130,246,0.4)', color: '#3b82f6', background: 'rgba(59,130,246,0.08)', transition: 'all 0.2s' }}>
+              <button onClick={onAdminClick} style={{ fontSize: 12, cursor: 'pointer', padding: '6px 14px', borderRadius: 20, border: '1px solid rgba(59,130,246,0.4)', color: '#3b82f6', background: 'rgba(59,130,246,0.08)' }}>
                 Admin
               </button>
             )}

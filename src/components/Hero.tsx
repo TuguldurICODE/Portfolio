@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import profileImg from '../assets/profile.jpg'
+import profileDarkImg from '../assets/profileDarkMode.jpg'
 
 type Props = { dark: boolean }
 
@@ -42,10 +43,30 @@ export default function Hero({ dark }: Props) {
         </div>
 
         <div style={{ position: 'relative', width: 260, height: 280, flexShrink: 0 }}>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 28, transform: 'rotate(4deg)', background: t('#1e1e1e', '#e8e8e6'), border: t('1px solid rgba(255,255,255,0.04)', '1px solid rgba(0,0,0,0.06)') }}></div>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 28, transform: 'rotate(-2deg)', background: t('#191919', '#eeeeec'), border: t('1px solid rgba(255,255,255,0.04)', '1px solid rgba(0,0,0,0.06)') }}></div>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 28, transform: 'rotate(4deg)', background: t('#1e1e1e', '#e8e8e6'), border: t('1px solid rgba(255,255,255,0.04)', '1px solid rgba(0,0,0,0.06)'), transition: 'background 0.4s' }}></div>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 28, transform: 'rotate(-2deg)', background: t('#191919', '#eeeeec'), border: t('1px solid rgba(255,255,255,0.04)', '1px solid rgba(0,0,0,0.06)'), transition: 'background 0.4s' }}></div>
           <div style={{ position: 'relative', width: 260, height: 280, borderRadius: 24, overflow: 'hidden', border: t('1px solid rgba(255,255,255,0.06)', '1px solid rgba(0,0,0,0.06)') }}>
-            <img src={profileImg} alt="Tuguldur Erendoo" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+
+            <img
+              src={profileImg}
+              alt="Tuguldur Erendoo"
+              style={{
+                position: 'absolute', inset: 0,
+                width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top',
+                opacity: dark ? 0 : 1,
+                transition: 'opacity 0.5s ease',
+              }}
+            />
+            <img
+              src={profileDarkImg}
+              alt="Tuguldur Erendoo Dark"
+              style={{
+                position: 'absolute', inset: 0,
+                width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top',
+                opacity: dark ? 1 : 0,
+                transition: 'opacity 0.5s ease',
+              }}
+            />
           </div>
         </div>
 
