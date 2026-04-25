@@ -10,14 +10,21 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5000
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'], credentials: true }))
+app.use(cors({
+  origin: '*',
+  credentials: true
+}))
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/visits', visitsRoutes)
 app.use('/api/admin', adminRoutes)
 
-app.get('/api/health', (_req, res) => res.json({ status: 'ok', time: new Date().toISOString() }))
+app.get('/api/health', (_req, res) => res.json({
+  status: 'ok',
+  time: new Date().toISOString(),
+  adminEmail: process.env.ADMIN_EMAIL || 'NOT SET'
+}))
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)

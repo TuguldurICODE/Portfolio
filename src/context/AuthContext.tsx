@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
 
-const API = 'http://localhost:5000/api'
+const API = 'https://portfolio-backend-production-021c.up.railway.app/api'
 
 interface User { id: string; email: string; name: string; role: 'admin' | 'user' }
 interface AuthCtx {
