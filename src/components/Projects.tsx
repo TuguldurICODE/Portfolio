@@ -1,9 +1,30 @@
 import React, { useState, useEffect } from 'react'
 
 const projects = [
-  { title: "Tuugii's Shop", desc: 'E-commerce platform with cart, filter, product modal', tags: ['React', 'TypeScript', 'Vite'], github: 'https://github.com/TuguldurICODE/Port-Shop', demo: 'https://tuguldurportfolio--shop-ko9jpm3u.web.app' },
-  { title: 'Portfolio site', desc: 'This website — with auth, admin dashboard, dark mode', tags: ['React', 'Node.js', 'Firebase'], github: 'https://github.com/TuguldurICODE/Portfolio', demo: 'https://tuguldurportfolio.web.app' },
-  { title: 'Task manager app', desc: 'Full-stack app with real-time sync', tags: ['React', 'Node.js', 'Firebase'], github: '', demo: '' },
+  {
+    title: "Tuugii's Shop",
+    desc: 'E-commerce platform with cart, filter, product modal',
+    tags: ['React', 'TypeScript', 'Vite'],
+    github: 'https://github.com/TuguldurICODE/Port-Shop',
+    demo: 'https://tuguldurportfolio--shop-ko9jpm3u.web.app',
+    screenshot: 'https://image.thum.io/get/width/600/crop/400/https://tuguldurportfolio--shop-ko9jpm3u.web.app'
+  },
+  {
+    title: 'Portfolio site',
+    desc: 'This website — with auth, admin dashboard, dark mode',
+    tags: ['React', 'Node.js', 'Firebase'],
+    github: 'https://github.com/TuguldurICODE/Portfolio',
+    demo: 'https://tuguldurportfolio.web.app',
+    screenshot: 'https://image.thum.io/get/width/600/crop/400/https://tuguldurportfolio.web.app'
+  },
+  {
+    title: 'Client Portal',
+    desc: 'Project & task management dashboard with auth, dark mode',
+    tags: ['React', 'Node.js', 'TypeScript'],
+    github: 'https://github.com/TuguldurICODE/Client-Portal',
+    demo: 'https://tuguldurportfolio--client-portal-f7bo2a8h.web.app',
+    screenshot: 'https://image.thum.io/get/width/600/crop/400/https://tuguldurportfolio--client-portal-f7bo2a8h.web.app'
+  },
 ]
 
 type Props = { dark: boolean }
@@ -20,18 +41,22 @@ export default function Projects({ dark }: Props) {
         <span style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', whiteSpace: 'nowrap', color: t('#555','#bbb') }}>Projects</span>
         <div style={{ flex: 1, height: 1, background: t('rgba(255,255,255,0.06)','rgba(0,0,0,0.08)') }}></div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
         {projects.map((p, i) => (
           <div key={p.title} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)}
             style={{ borderRadius: 14, overflow: 'hidden', border: t('1px solid rgba(255,255,255,0.07)','1px solid rgba(0,0,0,0.07)'), background: t('#1a1a1a','#ffffff'), boxShadow: hovered === i ? t('0 8px 32px rgba(0,0,0,0.5)','0 8px 32px rgba(0,0,0,0.1)') : t('0 2px 12px rgba(0,0,0,0.3)','0 2px 12px rgba(0,0,0,0.04)'), transform: hovered === i ? 'translateY(-4px)' : 'translateY(0)', transition: 'transform 0.2s, box-shadow 0.2s' }}>
-            <div style={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', background: t('#141414','#f2f2f0'), borderBottom: t('1px solid rgba(255,255,255,0.05)','1px solid rgba(0,0,0,0.05)') }}>
-              <svg width="80" height="64" viewBox="0 0 80 64" fill="none">
-                <rect x="8" y="12" width="44" height="34" rx="5" fill="none" stroke={t('#2e2e2e','#ccc')} strokeWidth="1"/>
-                <rect x="14" y="20" width="20" height="3" rx="1.5" fill={t('#2e2e2e','#ccc')}/>
-                <rect x="14" y="28" width="32" height="2" rx="1" fill={t('#252525','#ddd')}/>
-                <rect x="38" y="6" width="26" height="26" rx="4" fill="none" stroke={t('#252525','#ddd')} strokeWidth="1" transform="rotate(6 38 6)"/>
-              </svg>
+
+            {/* Screenshot */}
+            <div style={{ height: 160, overflow: 'hidden', background: t('#141414','#f2f2f0'), position: 'relative' }}>
+              <img
+                src={p.screenshot}
+                alt={p.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s', transform: hovered === i ? 'scale(1.04)' : 'scale(1)' }}
+                loading="lazy"
+                onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+              />
             </div>
+
             <div style={{ padding: 16 }}>
               <p style={{ fontSize: 14, fontWeight: 500, marginBottom: 6, color: t('#e0e0e0','#111') }}>{p.title}</p>
               <p style={{ fontSize: 12, marginBottom: 12, lineHeight: 1.6, color: t('#666','#999') }}>{p.desc}</p>
